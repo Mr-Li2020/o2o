@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 public class ShopServiceTest extends BaseTest {
     @Autowired
     private ShopService shopService;
+
     @Test
     public void testAddShop() throws FileNotFoundException {
         Shop shop = new Shop();
@@ -33,16 +34,37 @@ public class ShopServiceTest extends BaseTest {
         shop.setArea(area);
         shop.setOwner(owner);
         shop.setShopCategory(shopCategory);
-        shop.setShopName("测试店铺3");
-        shop.setShopDesc("test3");
-        shop.setShopAddr("test3");
-        shop.setPhone("test3");
+        shop.setShopName("测试店铺4");
+        shop.setShopDesc("test4");
+        shop.setShopAddr("test4");
+        shop.setPhone("test4");
         shop.setCreateTime(new Date());
         shop.setEnableStatus(ShopStateEnum.CHECK.getState());
         shop.setAdvice("审核中");
-        File shopImg = new File("E:/photo/o2o.jpg");
+        File shopImg = new File("E:/photo/RB.jpg");
         InputStream is = new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.addShop(shop, is,shopImg.getName());
-        assertEquals(ShopStateEnum.CHECK.getState(),shopExecution.getStatus());
+        ShopExecution shopExecution = shopService.addShop(shop, is, shopImg.getName());
+        assertEquals(ShopStateEnum.CHECK.getState(), shopExecution.getStatus());
+    }
+
+    @Test
+    public void testModifyShop() throws FileNotFoundException {
+        Shop shop = new Shop();
+        shop.setShopId(1L);
+        shop.setShopName("修改后的店铺名称3.0");
+        File shopImg = new File("E:/photo/RB.jpg");
+        InputStream is = new FileInputStream(shopImg);
+        ShopExecution shopExecution = shopService.modifyShop(shop, is, "RB.jpg");
+        System.out.println("新的图片的地址是:" + shopExecution.getShop().getShopImg());
+    }
+    @Test
+    public void testGetShopList() {
+        Shop shopCondition = new Shop();
+        ShopCategory sc = new ShopCategory();
+        sc.setShopCategoryId(1L);
+        shopCondition.setShopCategory(sc);
+        ShopExecution se = shopService.getShopList(shopCondition, 2, 3);
+        System.out.println("店铺列表数:"+se.getShopList().size());
+        System.out.println("店铺总数:"+se.getCount());
     }
 }
