@@ -1,6 +1,7 @@
 package com.myself.o2o.service;
 
 import com.myself.o2o.BaseTest;
+import com.myself.o2o.dto.ImageHolder;
 import com.myself.o2o.dto.ShopExecution;
 import com.myself.o2o.entity.Area;
 import com.myself.o2o.entity.PersonInfo;
@@ -43,7 +44,8 @@ public class ShopServiceTest extends BaseTest {
         shop.setAdvice("审核中");
         File shopImg = new File("E:/photo/RB.jpg");
         InputStream is = new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.addShop(shop, is, shopImg.getName());
+        ImageHolder imageHolder = new ImageHolder(shopImg.getName(), is);
+        ShopExecution shopExecution = shopService.addShop(shop, imageHolder);
         assertEquals(ShopStateEnum.CHECK.getState(), shopExecution.getStatus());
     }
 
@@ -54,9 +56,11 @@ public class ShopServiceTest extends BaseTest {
         shop.setShopName("修改后的店铺名称3.0");
         File shopImg = new File("E:/photo/RB.jpg");
         InputStream is = new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.modifyShop(shop, is, "RB.jpg");
+        ImageHolder imageHolder = new ImageHolder("RB.jpg", is);
+        ShopExecution shopExecution = shopService.modifyShop(shop, imageHolder);
         System.out.println("新的图片的地址是:" + shopExecution.getShop().getShopImg());
     }
+
     @Test
     public void testGetShopList() {
         Shop shopCondition = new Shop();
@@ -64,7 +68,7 @@ public class ShopServiceTest extends BaseTest {
         sc.setShopCategoryId(1L);
         shopCondition.setShopCategory(sc);
         ShopExecution se = shopService.getShopList(shopCondition, 2, 3);
-        System.out.println("店铺列表数:"+se.getShopList().size());
-        System.out.println("店铺总数:"+se.getCount());
+        System.out.println("店铺列表数:" + se.getShopList().size());
+        System.out.println("店铺总数:" + se.getCount());
     }
 }
