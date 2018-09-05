@@ -1,5 +1,6 @@
 package com.myself.o2o.util;
 
+import com.myself.o2o.dto.ImageHolder;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import org.slf4j.Logger;
@@ -41,20 +42,20 @@ public class ImageUtil {
     /**
      * 处理缩略图,并返回新生成图片的相对值路径
      *
-     * @param thumbnailInputStream
+     * @param thumbnail
      * @param targetAddr
      * @return
      */
-    public static String generateThumbnail(InputStream thumbnailInputStream, String fileName,String targetAddr) {
+    public static String generateThumbnail(ImageHolder thumbnail, String targetAddr) {
         String realFileName = getRandomFileName();
-        String extension = getFileExtension(fileName);
+        String extension = getFileExtension(thumbnail.getImageName());
         makeDirPath(targetAddr);
         String relativeAddr = targetAddr + realFileName + extension;
         logger.debug("current relativeAddr is:" + relativeAddr);
         File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
         logger.debug("current complete addr is:" + PathUtil.getImgBasePath() + relativeAddr);
         try {
-            Thumbnails.of(thumbnailInputStream).size(200, 200)
+            Thumbnails.of(thumbnail.getImage()).size(200, 200)
                     .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f)
                     .outputQuality(0.8f).toFile(dest);
         } catch (IOException e) {
@@ -103,12 +104,13 @@ public class ImageUtil {
      * storePath是文件的路径还是目录的路径
      * 如果是文件路径,则删除该文件
      * 如果是目录路径,则删除该目录下的所有文件
+     *
      * @param storePath
      */
-    public static void deleteFileOrPath(String storePath){
-        File fileOrPath = new File(PathUtil.getImgBasePath()+storePath);
-        if(fileOrPath.exists()){
-            if(fileOrPath.isDirectory()){
+    public static void deleteFileOrPath(String storePath) {
+        File fileOrPath = new File(PathUtil.getImgBasePath() + storePath);
+        if (fileOrPath.exists()) {
+            if (fileOrPath.isDirectory()) {
                 File files[] = fileOrPath.listFiles();
                 for (int i = 0; i < files.length; i++) {
                     files[i].delete();
@@ -117,6 +119,7 @@ public class ImageUtil {
             fileOrPath.delete();
         }
     }
+
     public static void main(String[] args) throws IOException {
 //        String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
         //在图片上添加水印
