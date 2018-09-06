@@ -4,19 +4,19 @@ import java.util.Date;
 import java.util.List;
 
 /**
-* @Description:    商品实体类
-* @Author:         liningbo
-* @CreateDate:     2018/8/29 15:51
-* @UpdateUser:     liningbo
-* @UpdateDate:     2018/8/29 15:51
-* @UpdateRemark:   修改内容
-* @Version:        1.0
-*/
+ * @Description: 商品实体类
+ * @Author: liningbo
+ * @CreateDate: 2018/8/29 15:51
+ * @UpdateUser: liningbo
+ * @UpdateDate: 2018/8/29 15:51
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
+ */
 public class Product {
     private Long productId;
     private String productName;
     private String productDesc;
-    //简略图地址
+    //简略图
     private String imgAddr;
     private String normalPrice;
     private String promotionPrice;
