@@ -40,7 +40,7 @@ public class ProductManagementController {
     private Map<String, Object> addProduct(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         //验证码验证
-        if (CodeUtil.checkVerifyCode(request)) {
+        if (!CodeUtil.checkVerifyCode(request)) {
             modelMap.put("success", false);
             modelMap.put("errMsg", "输入了错误的验证码");
             return modelMap;
@@ -64,7 +64,7 @@ public class ProductManagementController {
                 multipartRequest = (MultipartHttpServletRequest) request;
                 //取出缩略图并构建ImageHolder对象
                 CommonsMultipartFile thumbnailFile = (CommonsMultipartFile) multipartRequest.getFile("thumbnail");
-                thumbnail = new ImageHolder(thumbnailFile.getName(), thumbnailFile.getInputStream());
+                thumbnail = new ImageHolder(thumbnailFile.getOriginalFilename(), thumbnailFile.getInputStream());
                 //取出详情图列表并构建List<ImageHolder>列表对象,最多支持上传六张
                 for (int i = 0; i < IMAGEMAXCOUNT; i++) {
                     CommonsMultipartFile productImgFile = (CommonsMultipartFile) multipartRequest.getFile("productImg" + i);
@@ -101,9 +101,7 @@ public class ProductManagementController {
             try {
                 //从session中获取当前店铺id并赋值给product,减少对前台数据的依赖
                 Shop currentShop = (Shop) request.getSession().getAttribute("currentShop");
-                Shop shop = new Shop();
-                shop.setShopId(currentShop.getShopId());
-                product.setShop(shop);
+                product.setShop(currentShop);
                 //执行添加操作
                 ProductExecution productExecution = productService.addProduct(product, thumbnail, productImgList);
                 if (productExecution.getState() == ProductStateEnum.SUCCESS.getState()) {
