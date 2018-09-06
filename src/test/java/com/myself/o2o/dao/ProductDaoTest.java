@@ -21,30 +21,17 @@ public class ProductDaoTest extends BaseTest {
         productCategory.setShopId(1L);
         Shop shop = new Shop();
         shop.setShopId(1L);
-        Product product1 = new Product();
-        product1.setProductName("测试商品1");
-        product1.setProductDesc("测试描述1");
-        product1.setEnableStatus(0);
-        product1.setPriority(10);
-        product1.setCreateTime(new Date());
-        product1.setLastEditTime(new Date());
-        product1.setProductCategory(productCategory);
-        product1.setShop(shop);
-
-        Product product2 = new Product();
-        product2.setProductName("测试商品2");
-        product2.setProductDesc("测试描述2");
-        product2.setEnableStatus(0);
-        product2.setPriority(20);
-        product2.setCreateTime(new Date());
-        product2.setLastEditTime(new Date());
-        product2.setProductCategory(productCategory);
-        product2.setShop(shop);
-
-        int effectedNum1 = productDao.insertProduct(product1);
-        assertEquals(1, effectedNum1);
-        int effectedNum2 = productDao.insertProduct(product2);
-        assertEquals(1, effectedNum2);
+        Product product = new Product();
+        product.setProductName("测试商品3");
+        product.setProductDesc("测试描述3");
+        product.setEnableStatus(0);
+        product.setPriority(30);
+        product.setCreateTime(new Date());
+        product.setLastEditTime(new Date());
+        product.setProductCategory(productCategory);
+        product.setShop(shop);
+        int effectedNum = productDao.insertProduct(product);
+        assertEquals(1, effectedNum);
 
     }
 }
