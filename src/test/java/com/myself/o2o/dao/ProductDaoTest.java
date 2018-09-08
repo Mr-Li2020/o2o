@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -55,5 +56,29 @@ public class ProductDaoTest extends BaseTest {
         product.setProductCategory(productCategory);
         int effectedNum = productDao.updateProduct(product);
         assertEquals(1, effectedNum);
+    }
+
+    @Test
+    public void testQueryProductList(){
+        Product productCondition = new Product();
+        //分页查询,预期返回4条数据
+        List<Product> productList = productDao.queryProductList(productCondition,0,4);
+        assertEquals(4,productList.size());
+
+        //查询商品总数
+        int count = productDao.queryProductCount(productCondition);
+        System.out.println(count);
+
+        //使用商品模糊查询商品名为测试的总数  预期返回三条结果
+        productCondition.setProductName("测试");
+        productList = productDao.queryProductList(productCondition, 0, 4);
+        assertEquals(3,productList.size());
+    }
+
+    @Test
+    public void testUpdateProductCategoryToNull(){
+        //将productCategoryId为2的商品类别下的商品的商品类别置为空
+        int effectedNum = productDao.updateProductCategoryToNull(5L);
+        assertEquals(2,effectedNum);
     }
 }
