@@ -18,3 +18,13 @@
 2018-09-08 18:59:25:610 [main] DEBUG c.m.o2o.dao.ProductDao.updateProductCategoryToNull-==>  Preparing: update tb_product set product_category_id = null where product_category_id = ? 
 2018-09-08 18:59:25:638 [main] DEBUG c.m.o2o.dao.ProductDao.updateProductCategoryToNull-==> Parameters: 5(Long)
 2018-09-08 18:59:25:735 [main] DEBUG c.m.o2o.dao.ProductDao.updateProductCategoryToNull-<==    Updates: 2
+2018-09-08 20:56:04:810 [main] DEBUG com.myself.o2o.dao.HeadLineDao.queryHeadLine-==>  Preparing: select line_id,line_name,line_link,line_img,priority,enable_status,ccreate_time,last_edit_time from tb_head_line order by priority desc 
+2018-09-08 20:56:04:843 [main] DEBUG com.myself.o2o.dao.HeadLineDao.queryHeadLine-==> Parameters: 
+2018-09-08 22:18:11:759 [main] DEBUG com.myself.o2o.dao.HeadLineDao.queryHeadLine-==>  Preparing: select line_id,line_name,line_link,line_img,priority,enable_status,ccreate_time,last_edit_time from tb_head_line order by priority desc 
+2018-09-08 22:18:11:783 [main] DEBUG com.myself.o2o.dao.HeadLineDao.queryHeadLine-==> Parameters: 
+2018-09-08 22:18:36:683 [main] DEBUG com.myself.o2o.dao.HeadLineDao.queryHeadLine-==>  Preparing: select line_id,line_name,line_link,line_img,priority,enable_status,create_time,last_edit_time from tb_head_line order by priority desc 
+2018-09-08 22:18:36:707 [main] DEBUG com.myself.o2o.dao.HeadLineDao.queryHeadLine-==> Parameters: 
+2018-09-08 22:18:36:833 [main] DEBUG com.myself.o2o.dao.HeadLineDao.queryHeadLine-<==      Total: 2
+2018-09-08 22:33:11:462 [main] DEBUG c.myself.o2o.dao.ShopCategoryDao.queryShopCategory-==>  Preparing: select shop_category_id, shop_category_name, shop_category_img, shop_category_desc, priority, create_time, last_edit_time, parent_id from tb_shop_category WHERE parent_id is null order by priority DESC 
+2018-09-08 22:33:11:491 [main] DEBUG c.myself.o2o.dao.ShopCategoryDao.queryShopCategory-==> Parameters: 
+2018-09-08 22:33:11:515 [main] DEBUG c.myself.o2o.dao.ShopCategoryDao.queryShopCategory-<==      Total: 1
