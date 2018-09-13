@@ -144,7 +144,7 @@ public class ProductManagementController {
         //非空判断
         if (productId > -1) {
             //获取商品信息
-            Product producct = productService.getProducctById(productId);
+            Product producct = productService.getProductById(productId);
             //获取该店铺下的商品类别列表
             List<ProductCategory> productCategoryList = productCategoryService.getProductCategoryList(producct.getShop().getShopId());
             modelMap.put("product", producct);
