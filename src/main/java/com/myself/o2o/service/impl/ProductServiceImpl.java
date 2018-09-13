@@ -70,9 +70,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProducctById(long productId) {
+    public Product getProductById(long productId) {
         return productDao.queryProductById(productId);
     }
+
 
     @Override
     public ProductExecution modifyProduct(Product product, ImageHolder thumbnail, List<ImageHolder> productImgHolderList) throws ProductOperationException {

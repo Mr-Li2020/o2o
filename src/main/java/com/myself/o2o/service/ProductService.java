@@ -21,7 +21,7 @@ public interface ProductService {
      * @param productId
      * @return
      */
-    Product getProducctById(long productId);
+    Product getProductById(long productId);
 
     /**
      * 修改商品信息以及图片处理
