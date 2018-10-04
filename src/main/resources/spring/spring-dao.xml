@@ -11,7 +11,7 @@
     <!-- 2.数据库连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" >
         <property name="driverClassName" value="${jdbc.driver}"/>
-        <property name="url" value="${jdbc.master.url}"/>
+        <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
         <!-- 连接池的私有属性 -->
